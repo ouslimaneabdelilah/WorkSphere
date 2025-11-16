@@ -1,0 +1,111 @@
+[
+  {
+    "id": 1,
+    "name": "Alice Dupont",
+    "role": "Réceptionniste",
+    "photo": "https://picsum.photos/200/300",
+    "email": "alice.dupont@example.com",
+    "phone": "0612345678",
+    "experiences": [
+      { "company": "Entreprise A", "startDate": "2018-01-01", "endDate": "2020-06-30" }
+    ],
+    "currentZone": "Réception"
+  },
+  {
+    "id": 2,
+    "name": "Bob Martin",
+    "role": "Technicien IT",
+    "photo": "https://picsum.photos/200/300",
+    "email": "bob.martin@example.com",
+    "phone": "0698765432",
+    "experiences": [
+      { "company": "Entreprise B", "startDate": "2017-03-15", "endDate": "2021-12-31" }
+    ],
+    "currentZone": "Salle des serveurs"
+  },
+  {
+    "id": 3,
+    "name": "Clara Moreau",
+    "role": "Agent de sécurité",
+    "photo": "https://picsum.photos/200/300",
+    "email": "clara.moreau@example.com",
+    "phone": "0611223344",
+    "experiences": [
+      { "company": "SécuriCorp", "startDate": "2019-05-01", "endDate": "2022-10-01" }
+    ],
+    "currentZone": "Salle de sécurité"
+  },
+  {
+    "id": 4,
+    "name": "David Petit",
+    "role": "Manager",
+    "photo": "https://picsum.photos/200/300",
+    "email": "david.petit@example.com",
+    "phone": "0622334455",
+    "experiences": [
+      { "company": "Entreprise C", "startDate": "2015-09-01", "endDate": "2020-01-01" },
+      { "company": "Entreprise D", "startDate": "2020-02-01", "endDate": "2024-01-01" }
+    ],
+    "currentZone": null
+  },
+  {
+    "id": 5,
+    "name": "Elodie Bernard",
+    "role": "Nettoyage",
+    "photo": "https://picsum.photos/200/300",
+    "email": "elodie.bernard@example.com",
+    "phone": "0633445566",
+    "experiences": [
+      { "company": "ProNettoyage", "startDate": "2020-01-01", "endDate": "2023-05-01" }
+    ],
+    "currentZone": null
+  },
+  {
+    "id": 6,
+    "name": "François Leclerc",
+    "role": "Technicien IT",
+    "photo": "https://picsum.photos/200/300",
+    "email": "francois.leclerc@example.com",
+    "phone": "0644556677",
+    "experiences": [
+      { "company": "IT Solutions", "startDate": "2016-04-01", "endDate": "2022-03-01" }
+    ],
+    "currentZone": null
+  },
+  {
+    "id": 7,
+    "name": "Gabrielle Rousseau",
+    "role": "Réceptionniste",
+    "photo": "https://picsum.photos/200/300",
+    "email": "gabrielle.rousseau@example.com",
+    "phone": "0655667788",
+    "experiences": [
+      { "company": "Hotel Lux", "startDate": "2018-07-01", "endDate": "2021-12-01" }
+    ],
+    "currentZone": null
+  },
+  {
+    "id": 8,
+    "name": "Hugo Fontaine",
+    "role": "Agent de sécurité",
+    "photo": "https://picsum.photos/200/300",
+    "email": "hugo.fontaine@example.com",
+    "phone": "0666778899",
+    "experiences": [
+      { "company": "SafeCorp", "startDate": "2017-05-01", "endDate": "2022-09-01" }
+    ],
+    "currentZone": null
+  },
+  {
+    "id": 9,
+    "name": "Isabelle Caron",
+    "role": "Technicien IT",
+    "photo": "https://picsum.photos/200/300",
+    "email": "isabelle.caron@example.com",
+    "phone": "0677889900",
+    "experiences": [
+      { "company": "TechPlus", "startDate": "2019-01-01", "endDate": "2023-01-01" }
+    ],
+    "currentZone": null
+  }
+]
