@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/237dd4ebeb.js" crossorigin="anonymous"></script>
     <script src="/script.js"></script>
 </head>
 <body>
+    <button class="hamburger" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
     <main class="plan">
         <aside class="sidebar">
 			<div class="side-head">
@@ -15,7 +17,7 @@
 			</div>
             <div class="list-staff">
 
-                <ul id="unassigned" class="staff-list">
+                <ul id="unassigned" class="staff-list" >
                     <li class="employee">
                         <img src="" alt="" width="50px" height="50px">
                         <div class="content-employe">
@@ -26,11 +28,37 @@
                     </li>
                 </ul>
             </div>
-            <button id="btn-add">Add New Worker</button>
+            <button id="btn-add"><i class="fa-solid fa-plus">Add New Worker</i></button>
 		</aside>
         <section class="floor-wrap">
             <div  id="floorplan">
-				
+				<div class="zone conference" data-zone="Conference">
+					<div class="zone-head"><span>Salle de conférence</span><button class="add"><i class="fa-solid fa-plus"></i></i></button></div>
+					<div class="zone-body"></div>
+				</div>
+                <div class="zone empty-y"></div>
+                <div class="zone empty-x"></div>
+				<div class="zone reception" data-zone="Reception">
+					<div class="zone-head"><span>Réception</span><button class="add"><i class="fa-solid fa-plus"></i></button></div>
+					<div class="zone-body"></div>
+				</div>
+				<div class="zone server" data-zone="Server Room">
+					<div class="zone-head"><span>Salle des serveurs</span><button class="add"><i class="fa-solid fa-plus"></i></button></div>
+					<div class="zone-body"></div>
+				</div>
+				<div class="zone security" data-zone="Security">
+					<div class="zone-head"><span>Sécurité</span><button class="add"><i class="fa-solid fa-plus"></i></button></div>
+					<div class="zone-body"></div>
+				</div>
+				<div class="zone staffroom" data-zone="Staff Room">
+					<div class="zone-head"><span>Salle du personnel</span><button class="add"><i class="fa-solid fa-plus"></i></button></div>
+					<div class="zone-body"></div>
+				</div>
+
+				<div class="zone archive" data-zone="Archive">
+					<div class="zone-head"><span>Archive</span><button class="add"><i class="fa-solid fa-plus"></i></button></div>
+					<div class="zone-body"></div>
+				</div>
 			</div>
         </section>
     </main>
