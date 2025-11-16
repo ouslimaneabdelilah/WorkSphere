@@ -37,3 +37,74 @@
 
 
 
+.plan {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 360px 1fr;
+
+}
+
+.floor-wrap {
+    background-color: var(--bg-plan);
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+
+}
+.sidebar {
+    margin: 40px 8px 0px 8px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 10px;
+    padding: 15px;
+}
+
+.side-head h2 {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.employee {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--bg-box-aside);
+    padding: 5px;
+    border: #808387 solid 1px;
+    border-radius: 8px;
+}
+
+.employee img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.edit {
+    color: var(--edit-color);
+    font-size: medium;
+    font-weight: 500;
+
+}
+
+#floorplan {
+    display: grid;
+    width: 100%;
+    margin: 0px 60px 0px 60px;
+    aspect-ratio: 16/9;
+    background-image: var(--background-img);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    grid-template-columns: 1.35fr 0.6fr 0.8fr 0.8fr;
+    grid-template-rows: 1.1fr 1fr 1.1fr;
+    gap: 5px;
+    grid-template-areas:
+        "conference emptyy server security"
+        "reception emptyy emptyx emptyx"
+        "reception emptyy staffroom archive";
+}
+
