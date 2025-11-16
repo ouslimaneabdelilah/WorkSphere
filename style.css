@@ -1,0 +1,19 @@
+:root {
+    --btn-scn: #4CB050;
+    --btn-hscn: #29712b;
+    --btn-pry: #2196F3;
+    --btn-hpry: #075ca1;
+    --bg-box-aside: #F8F9FB;
+    --text-color: #53505A;
+    --btn-close: #F2473D;
+    --edit-color: #F4B63E;
+    --bg-plan: #F3F7FA;
+    --background-img: url("./assets/img/image.png")
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
