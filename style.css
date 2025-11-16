@@ -19,7 +19,6 @@
 
 #btn-add {
     background-color: var(--btn-scn);
-    position: absolute;
     bottom: 40px;
     color: white;
     font-size: medium;
@@ -28,8 +27,10 @@
     border-radius: 8px;
     padding: 15px;
     cursor: pointer;
-    width: 65%;
+    position: absolute;
+    width: 95%;
 }
+
 #btn-add:hover{
     background-color: var(--btn-hscn);
 }
@@ -40,7 +41,7 @@
 .plan {
     display: grid;
     gap: 12px;
-    grid-template-columns: 360px 1fr;
+    grid-template-columns: 0.1fr 1fr;
 
 }
 
@@ -53,10 +54,13 @@
 
 }
 .sidebar {
-    margin: 40px 8px 0px 8px;
+    box-shadow: 0px 0px 10px 5px #777877;
+    padding: 8px;
+    position: relative;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    position: relative;
+    align-items: center;
     gap: 10px;
     padding: 15px;
 }
@@ -65,8 +69,11 @@
     font-size: xx-large;
     font-weight: bold;
 }
-
+.list-staff{
+    width: 100%;
+}
 .employee {
+    width: 100%;
     list-style: none;
     display: flex;
     justify-content: space-around;
@@ -106,5 +113,66 @@
         "conference emptyy server security"
         "reception emptyy emptyx emptyx"
         "reception emptyy staffroom archive";
+    transition: .3s ease;
 }
 
+.conference {
+    grid-area: conference;
+    background-color: rgba(255, 0, 0, 0.4);
+}
+
+.reception {
+    grid-area: reception;
+    background-color: rgba(0, 255, 0, 0.4);
+}
+
+.server {
+    grid-area: server;
+    background-color: rgba(0, 0, 255, 0.4);
+}
+
+.security {
+    grid-area: security;
+    background-color: rgba(255, 255, 0, 0.4);
+}
+
+.staffroom {
+    grid-area: staffroom;
+    background-color: rgba(0, 255, 255, 0.4);
+}
+
+.archive {
+    grid-area: archive;
+    background-color: rgba(255, 0, 255, 0.4);
+}
+
+.empty-x {
+    grid-area: emptyx;
+}
+
+.empty-y {
+    grid-area: emptyy;
+}
+
+.zone {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.zone-head{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.add{
+    background-color: var(--btn-pry);
+    color: white;
+    width: 40px;
+    height: 30px;
+    border: #808387 solid 1px;
+    border-radius: 8px;
+}
