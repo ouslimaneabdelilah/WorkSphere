@@ -10,17 +10,72 @@
 </head>
 <body>
     <button class="hamburger" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
-	<div class="dialog" id="dialog">
+	<div class="dialog is-hidden" id="dialog">
     <div id="bluer-modal"></div>
 
     <div class="modal">
         <div class="close-modal">
             <i class="fa-solid fa-xmark"></i>
         </div>
-		<div class="message-succes" style="color: rgb(39, 195, 0);">
-
-		</div>
-		
+		<form id="myform">
+			<div class="champ">
+				<label for="" class="name">Name</label>
+				<input type="text" name="name" id="name">
+			</div>
+			<div class="champ">
+				<label for="roles">Roles</label>
+				<select name="role" id="role">
+					<option value="">-- Selecte un Role</option>
+					<option value="Réceptionnistes">Réceptionnistes</option>
+					<option value="it">Techniciens IT</option>
+					<option value="Agents">Agents de sécurité</option>
+					<option value="Manager">Manager</option>
+					<option value="Nettoyage ">Nettoyage </option>
+				</select>
+				<div class="champ">
+					<label for="" class="name">Image</label>
+					<input type="url" name="image" id="image" placeholder="https://picsum.photos/200/300">
+					<div class="image-afficher">
+						<img src="" alt="">
+					</div>
+				</div>
+			</div>
+			<div class="Expériences">
+				<label for="Expériences">Expériences</label>
+				<div class="Exp-champs">
+					<div class="ex-champ company">
+						<label for="company">Company:</label>
+						<input type="text" name="company" id="company">
+					</div>
+					<div class="ex-champ ex-role">
+						<label for="ex-role">Role:</label>
+						<input type="text" name="ex-role" id="ex-role">
+					</div>
+					<div class="ex-champ date-from">
+						<label for="date-from">From:</label>
+						<input type="date" name="date-from" id="date-from">
+					</div>
+					<div class="ex-champ date-to">
+						<label for="date-to">To:</label>
+						<input type="date" name="date-to" id="date-to">
+					</div>
+					<div class="champ">
+						<label for="email">Email: </label>
+						<input type="text" id="email">
+					</div>
+					<div class="champ">
+						<label for="phone">Phone: </label>
+						<input type="text" id="phone">
+					</div>
+					<button id="add-exp">Add Expérience</button>
+				</div>
+			
+			</div>
+			<div class="errours">
+				<ul id="errours-all"></ul>
+			</div>
+			<input type="submit" value="Confirem">
+		</form>	
     </div>
 </div>
 	</div>
@@ -35,7 +90,7 @@
                   
                 </ul>
             </div>
-            <button id="btn-add"><i class="fa-solid fa-plus">Add New Worker</i></button>
+            <button id="btn-add">+ Add New Worker</button>
 		</aside>
         <section class="floor-wrap">
             <div  id="floorplan">
