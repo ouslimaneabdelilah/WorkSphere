@@ -41,5 +41,27 @@ document.addEventListener("DOMContentLoaded", function () {
   })
 
 
+  //function affichier le officers
+  loadData()
+  function renderAffichier(employees){
+	console.log("hhhh")
+	const unassigned = document.getElementById("unassigned");
+	unassigned.innerHTML = "";
+	employees.forEach(employee => {
+		unassigned.innerHTML += `
+		<li class="employee">
+                        <img src="${employee.photo}" alt="" width="50px" height="50px">
+                        <div class="content-employe">
+                            <div class="name-employe">${employee.name}</div>
+                            <div class="role-employe">${employee.role}</div>
+                        </div>
+                        <div class="edit">Edit</div>
+        </li>
+		`
+	});
+  }
+
+  // function Ajouter un office 
+
 
 });
