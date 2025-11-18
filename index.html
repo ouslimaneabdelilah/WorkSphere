@@ -34,10 +34,10 @@
 						<option value="Nettoyage ">Nettoyage </option>
 					</select>
 					<div class="champ">
-						<label for="" class="name">Image</label>
+						<label for="image" class="name">Image</label>
 						<input type="url" name="image" id="image" placeholder="https://picsum.photos/200/300">
 						<div class="image-afficher">
-							<img src="" alt="">
+							<img src="" alt="" id="img-src" class="is-hidden" >
 						</div>
 					</div>
 				</div>
@@ -50,9 +50,9 @@
 						</button>
 					</legend>
 					<div id="experiences-list" class="experiences-list">
-
 					</div>
 				</fieldset>
+			
 				<div class="champ">
 					<label for="email">Email: </label>
 					<input type="text" id="email">
@@ -64,7 +64,7 @@
 				<div class="errours">
 					<ul id="errours-all"></ul>
 				</div>
-				<input type="submit" value="Confirem">
+				<input type="submit" value="confirmer" class="btn--small">
 			</form>
 		</div>
 	</div>
