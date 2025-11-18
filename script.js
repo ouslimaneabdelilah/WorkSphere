@@ -4,7 +4,7 @@ const closeModal = document.querySelector(".close-modal");
 const btnAdd = document.getElementById("btn-add");
 const myForm = document.getElementById("myform");
 let formErrors = document.getElementById("errours-all");
-const dialog = document.getElementById("dialog")
+const dialog = document.getElementById("dialog");
 let employees = [];
 // function pour loadData
 async function loadData() {
@@ -109,49 +109,96 @@ myForm.addEventListener("submit", (e) => {
   const email = document.getElementById("email");
   const name = document.getElementById("name");
   const role = document.getElementById("role");
+  const phone = document.getElementById("phone");
   const rowsExper = document.querySelectorAll(".experience-row");
   formErrors.innerHTML = "";
-  formErrors.classList.add("is-hidden");
   let errors = [];
+
+  // Validation
+  if (name.value.trim() === "") {
+    errors.push("Le nom du membre est requis.");
+  }
+  if (role.value.trim() === "") {
+    errors.push("Le rôle du membre est requis.");
+  }
+  if (email.value.trim() === "") {
+    errors.push("L'email est requis.");
+  } else if (!/^\S+@\S+\.\S+$/.test(email.value.trim())) {
+    errors.push("L'email n'est pas valide.");
+  }
+  if (photo.value.trim() === "") {
+    errors.push("L'URL de la photo est requise.");
+  }
+
+  if (phone.value.trim() === "") {
+    errors.push("Le numéro de téléphone est requis.");
+  } else if (!/^0[5-7][0-9]{8}$/.test(phone.value.trim())) {
+    errors.push("Le numéro de téléphone n'est pas valide.");
+  }
+
+  const experiencesData = [];
+  rowsExper.forEach((row, index) => {
+    const company = row.querySelector('[name="company"]').value.trim();
+    const exRole = row.querySelector('[name="ex-role"]').value.trim();
+    const dateFrom = row.querySelector('[name="date-from"]').value;
+    const dateTo = row.querySelector('[name="date-to"]').value;
+
+    if (company === "" || exRole === "" || dateFrom === "" || dateTo === "") {
+      errors.push(`Tous les champs sont requis pour l'expérience #${index + 1}.`);
+    } else {
+      const from = new Date(dateFrom);
+      const to = new Date(dateTo);
+      if (from >= to) {
+        errors.push(
+          `'Date de début' doit être antérieure à 'Date de fin' pour l'expérience #${
+            index + 1
+          }.`
+        );
+      }
+      experiencesData.push({
+        company: company,
+        role: exRole,
+        startDate: dateFrom,
+        endDate: dateTo,
+      });
+    }
+  });
+
+  if (errors.length > 0) {
+    formErrors.innerHTML = errors.join("<br>");
+    formErrors.classList.add("is-errours");
+    return;
+  }
+
+  formErrors.innerHTML = "";
+
   const newEvent = {
     id: employees.length + 1,
     name: name.value.trim(),
     role: role.value.trim(),
     photo: photo.value.trim(),
     email: email.value.trim(),
-    experiences: [],
-    currentZone :null
+    phone: phone.value.trim(),
+    experiences: experiencesData,
+    currentZone: null,
   };
-  if (rowsExper.length >= 1) {
-    rowsExper.forEach((row) => {
-      const company = row.querySelector('[name="company"]').value;
-      const role = row.querySelector('[name="ex-role"]').value;
-      const dateFrom = row.querySelector('[name="date-from"]').value;
-      const dateTo = row.querySelector('[name="date-to"]').value;
-      newEvent.experiences.push({
-        company: company,
-        role: role,
-        startDate: dateFrom,
-        endDate: dateTo,
-      });
-    });
-  }
-  console.log(newEvent)
+
   employees.push(newEvent);
   saveData();
   renderAffichier(employees);
   dialog.classList.add("is-hidden");
   myForm.reset();
+  document.getElementById("img-src").classList.add("is-hidden");
   document.querySelector(".experiences-list").innerHTML = "";
+  formErrors.classList.remove("is-errours");
 });
 
-
-  // Event pour affichier image 
-  photo.addEventListener("change",(e)=>{
-    const afficherImage = document.getElementById("img-src")
-    afficherImage.classList.remove("is-hidden")
-    afficherImage.src = e.target.value
-  })
+// Event pour affichier image
+photo.addEventListener("change", (e) => {
+  const afficherImage = document.getElementById("img-src");
+  afficherImage.classList.remove("is-hidden");
+  afficherImage.src = e.target.value;
+});
 
 function addExperienceRow() {
   const experiences = document.querySelector(".experiences-list");
