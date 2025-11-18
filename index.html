@@ -1,128 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/237dd4ebeb.js" crossorigin="anonymous"></script>
-    <script src="/script.js"></script>
-</head>
-<body>
-    <button class="hamburger" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
-	<div class="dialog is-hidden" id="dialog">
-    <div id="bluer-modal"></div>
 
-    <div class="modal">
-        <div class="close-modal">
-            <i class="fa-solid fa-xmark"></i>
-        </div>
-		<form id="myform">
-			<div class="champ">
-				<label for="" class="name">Name</label>
-				<input type="text" name="name" id="name">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="https://kit.fontawesome.com/237dd4ebeb.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<button class="hamburger" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
+	<div class="dialog is-hidden" id="dialog">
+		<div id="bluer-modal"></div>
+
+		<div class="modal">
+			<div class="close-modal">
+				<i class="fa-solid fa-xmark"></i>
 			</div>
-			<div class="champ">
-				<label for="roles">Roles</label>
-				<select name="role" id="role">
-					<option value="">-- Selecte un Role</option>
-					<option value="Réceptionnistes">Réceptionnistes</option>
-					<option value="it">Techniciens IT</option>
-					<option value="Agents">Agents de sécurité</option>
-					<option value="Manager">Manager</option>
-					<option value="Nettoyage ">Nettoyage </option>
-				</select>
+			<form id="myform">
 				<div class="champ">
-					<label for="" class="name">Image</label>
-					<input type="url" name="image" id="image" placeholder="https://picsum.photos/200/300">
-					<div class="image-afficher">
-						<img src="" alt="">
+					<label for="" class="name">Name</label>
+					<input type="text" name="name" id="name">
+				</div>
+				<div class="champ">
+					<label for="roles">Roles</label>
+					<select name="role" id="role">
+						<option value="">-- Selecte un Role</option>
+						<option value="Réceptionnistes">Réceptionnistes</option>
+						<option value="it">Techniciens IT</option>
+						<option value="Agents">Agents de sécurité</option>
+						<option value="Manager">Manager</option>
+						<option value="Nettoyage ">Nettoyage </option>
+					</select>
+					<div class="champ">
+						<label for="" class="name">Image</label>
+						<input type="url" name="image" id="image" placeholder="https://picsum.photos/200/300">
+						<div class="image-afficher">
+							<img src="" alt="">
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="Expériences">
-				<label for="Expériences">Expériences</label>
-				<div class="Exp-champs">
-					<div class="ex-champ company">
-						<label for="company">Company:</label>
-						<input type="text" name="company" id="company">
+				<fieldset class="experiences">
+					<legend class="experiences-title">
+						Expériences (Optional)
+						<button type="button" class="btn btn--small" id="btn-add-experience"
+							onclick="addExperienceRow()">
+							+ Add Experience
+						</button>
+					</legend>
+					<div id="experiences-list" class="experiences-list">
+
 					</div>
-					<div class="ex-champ ex-role">
-						<label for="ex-role">Role:</label>
-						<input type="text" name="ex-role" id="ex-role">
-					</div>
-					<div class="ex-champ date-from">
-						<label for="date-from">From:</label>
-						<input type="date" name="date-from" id="date-from">
-					</div>
-					<div class="ex-champ date-to">
-						<label for="date-to">To:</label>
-						<input type="date" name="date-to" id="date-to">
-					</div>
-					<div class="champ">
-						<label for="email">Email: </label>
-						<input type="text" id="email">
-					</div>
-					<div class="champ">
-						<label for="phone">Phone: </label>
-						<input type="text" id="phone">
-					</div>
-					<button id="add-exp">Add Expérience</button>
+				</fieldset>
+				<div class="champ">
+					<label for="email">Email: </label>
+					<input type="text" id="email">
 				</div>
-			
-			</div>
-			<div class="errours">
-				<ul id="errours-all"></ul>
-			</div>
-			<input type="submit" value="Confirem">
-		</form>	
-    </div>
-</div>
+				<div class="champ">
+					<label for="phone">Phone: </label>
+					<input type="text" id="phone">
+				</div>
+				<div class="errours">
+					<ul id="errours-all"></ul>
+				</div>
+				<input type="submit" value="Confirem">
+			</form>
+		</div>
 	</div>
-    <main class="plan">
-        <aside class="sidebar">
+	</div>
+	<main class="plan">
+		<aside class="sidebar">
 			<div class="side-head">
 				<h2>Staff Members(Unassigned)</h2>
 			</div>
-            <div class="list-staff">
+			<div class="list-staff">
 
-                <ul id="unassigned" class="staff-list" >
-                  
-                </ul>
-            </div>
-            <button id="btn-add">+ Add New Worker</button>
+				<ul id="unassigned" class="staff-list">
+
+				</ul>
+			</div>
+			<button id="btn-add">+ Add New Worker</button>
 		</aside>
-        <section class="floor-wrap">
-            <div  id="floorplan">
+		<section class="floor-wrap">
+			<div id="floorplan">
 				<div class="zone conference" data-zone="Conference">
-					<div class="zone-head"><span>Salle de conférence</span><button class="add"><i class="fa-solid fa-plus"></i></i></button></div>
 					<div class="zone-body"></div>
+					<div class="zone-head"><span>Salle de conférence</span><button class="add"><i
+								class="fa-solid fa-plus"></i></i></button></div>
 				</div>
-                <div class="zone empty-y"></div>
-                <div class="zone empty-x"></div>
+				<div class="zone empty-y"></div>
+				<div class="zone empty-x"></div>
 				<div class="zone reception" data-zone="Reception">
-					<div class="zone-head"><span>Réception</span><button class="add"><i class="fa-solid fa-plus"></i></button></div>
 					<div class="zone-body"></div>
+					<div class="zone-head"><span>Réception</span><button class="add"><i
+								class="fa-solid fa-plus"></i></button></div>
 				</div>
 				<div class="zone server" data-zone="Server Room">
-					<div class="zone-head"><span>Salle des serveurs</span><button class="add"><i class="fa-solid fa-plus"></i></button></div>
 					<div class="zone-body"></div>
+					<div class="zone-head"><span>Salle des serveurs</span><button class="add"><i
+								class="fa-solid fa-plus"></i></button></div>
 				</div>
 				<div class="zone security" data-zone="Security">
-					<div class="zone-head"><span>Sécurité</span><button class="add"><i class="fa-solid fa-plus"></i></button></div>
 					<div class="zone-body"></div>
+					<div class="zone-head"><span>Salle de sécurité</span><button class="add"><i
+								class="fa-solid fa-plus"></i></button></div>
 				</div>
 				<div class="zone staffroom" data-zone="Staff Room">
-					<div class="zone-head"><span>Salle du personnel</span><button class="add"><i class="fa-solid fa-plus"></i></button></div>
 					<div class="zone-body"></div>
+					<div class="zone-head"><span>Salle du personnel</span><button class="add"><i
+								class="fa-solid fa-plus"></i></button></div>
 				</div>
 
 				<div class="zone archive" data-zone="Archive">
-					<div class="zone-head"><span>Archive</span><button class="add"><i class="fa-solid fa-plus"></i></button></div>
 					<div class="zone-body"></div>
+					<div class="zone-head"><span>Archive</span><button class="add"><i
+								class="fa-solid fa-plus"></i></button></div>
 				</div>
 			</div>
-        </section>
-    </main>
+		</section>
+	</main>
+	<script src="/script.js"></script>
+
 </body>
+
 </html>
