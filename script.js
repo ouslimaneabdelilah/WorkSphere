@@ -5,7 +5,13 @@ const btnAdd = document.getElementById("btn-add");
 const myForm = document.getElementById("myform");
 let formErrors = document.getElementById("errours-all");
 const dialog = document.getElementById("dialog");
+const photo = document.getElementById("image");
+const email = document.getElementById("email");
+const name = document.getElementById("name");
+const role = document.getElementById("role");
+const phone = document.getElementById("phone");
 let employees = [];
+let idEdite = null;
 // function pour loadData
 async function loadData() {
   try {
@@ -36,6 +42,12 @@ function saveData() {
 // event pour close modal
 closeModal.addEventListener("click", () => {
   dialog.classList.add("is-hidden");
+  myForm.reset();
+  document.getElementById("img-src").classList.add("is-hidden");
+  document.querySelector(".experiences-list").innerHTML = "";
+  formErrors.classList.remove("is-errours");
+  document.querySelector(".btn-submit").value = "Add";
+  idEdite = null;
 });
 // Event Click Add New Worker
 btnAdd.addEventListener("click", () => {
@@ -95,7 +107,7 @@ function renderAffichier(employees) {
                             <div class="name-employe">${employee.name}</div>
                             <div class="role-employe">${employee.role}</div>
                         </div>
-                        <div class="edit">Edit</div>
+                        <div class="edit" onclick="editEmploye(${employee.id})">Edit</div>
         </li>
 		`;
   });
@@ -103,13 +115,8 @@ function renderAffichier(employees) {
 renderAffichier(employees);
 // function Ajouter un office
 
-const photo = document.getElementById("image");
 myForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  const email = document.getElementById("email");
-  const name = document.getElementById("name");
-  const role = document.getElementById("role");
-  const phone = document.getElementById("phone");
   const rowsExper = document.querySelectorAll(".experience-row");
   formErrors.innerHTML = "";
   let errors = [];
@@ -144,7 +151,9 @@ myForm.addEventListener("submit", (e) => {
     const dateTo = row.querySelector('[name="date-to"]').value;
 
     if (company === "" || exRole === "" || dateFrom === "" || dateTo === "") {
-      errors.push(`Tous les champs sont requis pour l'expérience #${index + 1}.`);
+      errors.push(
+        `Tous les champs sont requis pour l'expérience #${index + 1}.`
+      );
     } else {
       const from = new Date(dateFrom);
       const to = new Date(dateTo);
@@ -171,9 +180,8 @@ myForm.addEventListener("submit", (e) => {
   }
 
   formErrors.innerHTML = "";
-
-  const newEvent = {
-    id: employees.length + 1,
+  const newEmploye = {
+    id: idEdite? idEdite: employees.length + 1,
     name: name.value.trim(),
     role: role.value.trim(),
     photo: photo.value.trim(),
@@ -182,8 +190,15 @@ myForm.addEventListener("submit", (e) => {
     experiences: experiencesData,
     currentZone: null,
   };
+  if(idEdite){
+    const employeEdit = employees.find((e) => Number(e.id) === Number(idEdite));
+    Object.assign(employeEdit,newEmploye)
+    idEdite=null
+  }else{
 
-  employees.push(newEvent);
+    employees.push(newEmploye);
+  }
+
   saveData();
   renderAffichier(employees);
   dialog.classList.add("is-hidden");
@@ -200,6 +215,8 @@ photo.addEventListener("change", (e) => {
   afficherImage.src = e.target.value;
 });
 
+
+//function ajouter experience
 function addExperienceRow() {
   const experiences = document.querySelector(".experiences-list");
   experiences.innerHTML += ` 
@@ -224,7 +241,52 @@ function addExperienceRow() {
                               </div>
                         `;
 }
-
+// suppremier 
 function deleted(e) {
   e.closest(".experience-row").remove();
+}
+// edit employe
+function editEmploye(id) {
+  dialog.classList.remove("is-hidden");
+
+  const editEmp = employees.find((e) => Number(e.id) === Number(id));
+  if (!editEmp) return;
+  name.value = editEmp.name;
+  email.value = editEmp.email;
+  photo.value = editEmp.photo;
+  phone.value = editEmp.phone;
+  role.value = editEmp.role;
+
+  const afficherImage = document.getElementById("img-src");
+  afficherImage.classList.remove("is-hidden");
+  afficherImage.src = editEmp.photo;
+
+  const experiences = document.querySelector(".experiences-list");
+  experiences.innerHTML = ""; 
+
+  editEmp.experiences.forEach((ex) => {
+    experiences.innerHTML += ` 
+                            <div class="experience-row">
+                                <div class="ex-champ company">
+                                  <label for="company">Company:</label>
+                                  <input type="text" name="company" id="company" value="${ex.company}">
+                                </div>
+                                <div class="ex-champ ex-role">
+                                  <label for="ex-role">Role:</label>
+                                  <input type="text" name="ex-role" id="ex-role" value="${ex.role}">
+                                </div>
+                                <div class="ex-champ date-from">
+                                  <label for="date-from">From:</label>
+                                  <input type="date" name="date-from" id="date-from" value="${ex.startDate}">
+                                </div>
+                                <div class="ex-champ date-to">
+                                  <label for="date-to">To:</label>
+                                  <input type="date" name="date-to" id="date-to" value="${ex.endDate}">
+                                </div>
+                                <button type="button" class="btn btn--danger variant-row__remove" onclick="deleted(this)">Remove</button>
+                              </div>
+                        `;
+  });
+  idEdite = editEmp.id;
+  document.querySelector(".btn-submit").value = "Edit";
 }

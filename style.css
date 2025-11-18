@@ -92,6 +92,7 @@
     color: var(--edit-color);
     font-size: medium;
     font-weight: 500;
+    cursor: pointer;
 
 }
 
