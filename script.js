@@ -339,3 +339,61 @@ function showdetails(id){
   });
 }
 
+
+// function ajouter employes dans les salles
+function filterEmployeRole(employees,role){
+  return employees.filter(emp => emp.role === role && emp.currentZone ===null)
+}
+function addToSalle(e){
+  const contentModal= document.querySelector(".content-modal");
+  document.getElementById("dialog2").classList.remove("is-hidden")
+  const zone =e.closest(".zone").dataset.zone
+  const unassignedEmployees = employees.filter((emp) => emp.currentZone === null);
+  let employeeAcces=[];
+  const uniqueZones = {
+    "Réception": "Réceptionnistes",
+    "Salle des serveurs": "it",
+    "Salle de sécurité": "Agents",
+  };
+  if (uniqueZones[zone]) {
+    employeeAcces = unassignedEmployees.filter(
+      (emp) => emp.role === uniqueZones[zone] || emp.role === "Manager"
+    );
+  } else if (zone === "Salle d'archive") {
+    employeeAcces = unassignedEmployees.filter(
+      (emp) => emp.role !== "Nettoyage"
+    );
+  } else {
+    employeeAcces = unassignedEmployees;
+  }
+  contentModal.innerHTML = ""
+  if(employeeAcces.length>0){
+    employeeAcces.forEach(employee=>{
+      contentModal.innerHTML += `
+      <li class="employee" onclick="selectEmploye(this)" data-id="${employee.id}" data-zone="${zone}">
+                          <img src="${employee.photo}" alt="" width="50px" height="50px">
+                          <div class="content-employe">
+                              <div class="name-employe">${employee.name}</div>
+                              <div class="role-employe">${employee.role}</div>
+                          </div>
+          </li>`
+    })
+  }
+  else{
+    contentModal.innerHTML +=`
+          <li class="employee">n'est pas des members</li>
+
+    `
+  } 
+    document.querySelector("#dialog2 .close-modal").addEventListener("click", () => {
+      document.getElementById("dialog2").classList.add("is-hidden");
+  });
+}
+//function pour select en member
+function selectEmploye(e){
+    const idselect = e.dataset.id;
+    const employe = employees.find(e=>Number(e.id) === Number(idselect)) 
+    Object.assign(employe,{currentZone:e.dataset.zone})
+    saveData()
+    renderAffichier(employees)
+}
