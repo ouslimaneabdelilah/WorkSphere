@@ -11,7 +11,11 @@
     --bg-plan: #F3F7FA;
     --background-img: url("./assets/img/image.png")
 }
+::-webkit-scrollbar{
+    display: none;
+}
 * {
+
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -73,8 +77,9 @@
 .employee {
     width: 100%;
     list-style: none;
+    cursor: pointer;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     background-color: var(--bg-box-aside);
     padding: 5px;
@@ -90,10 +95,18 @@
 
 .edit {
     color: var(--edit-color);
+    padding: 5px 10px;
+    border: #888 solid 1px;
+    border-radius: 5px;
+
     font-size: medium;
     font-weight: 500;
     cursor: pointer;
 
+}
+.edit:hover{
+    background-color: var(--edit-color);
+    color: black;
 }
 
 #floorplan {
@@ -248,7 +261,7 @@
     color: #333;
 }
 
-#myform {
+#myform,.content-modal {
     display: flex;
     flex-direction: column;
     gap: 18px; 
@@ -415,12 +428,12 @@ input[type="submit"]:hover {
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 8px;
     background-color: var(--bg-box-aside);
     padding: 5px;
     border-radius: 8px;
     border: 1px solid #ddd;
-    width: 100%;
 }
 
 .employee-sale img {

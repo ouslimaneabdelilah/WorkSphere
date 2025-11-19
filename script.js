@@ -1,6 +1,6 @@
 const STORAGE_KEY = "employees";
 const url = "./employees.json";
-const closeModal = document.querySelector(".close-modal");
+const closeModal = document.querySelector("#dialog .close-modal");
 const btnAdd = document.getElementById("btn-add");
 const myForm = document.getElementById("myform");
 let formErrors = document.getElementById("errours-all");
@@ -41,6 +41,7 @@ function saveData() {
 
 // event pour close modal
 closeModal.addEventListener("click", () => {
+  console.log("hhhhh")
   dialog.classList.add("is-hidden");
   myForm.reset();
   document.getElementById("img-src").classList.add("is-hidden");
@@ -88,7 +89,7 @@ function renderAffichier(employees) {
     { name: "Salle des serveurs", selector: ".server .zone-body" },
     { name: "Salle de sécurité", selector: ".security .zone-body" },
     { name: "Salle du personnel", selector: ".staffroom .zone-body" },
-    { name: "Archive", selector: ".archive .zone-body" },
+    { name: "Salle d'archive", selector: ".archive .zone-body" },
     { name: "Salle de conférence", selector: ".conference .zone-body" },
   ];
 
@@ -101,7 +102,7 @@ function renderAffichier(employees) {
   unassigned.innerHTML = "";
   memberUnassigned.forEach((employee) => {
     unassigned.innerHTML += `
-		<li class="employee">
+		<li class="employee" onclick="showdetails(${employee.id})">
                         <img src="${employee.photo}" alt="" width="50px" height="50px">
                         <div class="content-employe">
                             <div class="name-employe">${employee.name}</div>
@@ -290,3 +291,51 @@ function editEmploye(id) {
   idEdite = editEmp.id;
   document.querySelector(".btn-submit").value = "Edit";
 }
+
+
+// details employe 
+
+function showdetails(id){
+  const showEmp=employees.find(e=>Number(e.id) === Number(id));
+  const contentModal= document.querySelector(".content-modal");
+  document.getElementById("dialog2").classList.remove("is-hidden")
+  contentModal.innerHTML = `
+        <div class="image-afficher">
+            <img src="./assets/img/image.png" alt="" id="img-src" >
+        </div>
+        <div class="champ">
+					<label for="name" class="name">Name: </label>
+					<input type="text" name="name" id="name" value="${showEmp.name}" disabled>
+				</div>
+        <div class="champ">
+					<label for="role" class="role">Role:</label>
+					<input type="text" name="role" id="role" value="${showEmp.role}" disabled>
+				</div>
+        <div class="champ">
+					<label for="email" class="email">Email:</label>
+					<input type="text" name="email" id="email" value="${showEmp.email}" disabled>
+				</div>
+        <div class="champ">
+					<label for="phone" class="phone">Phone:</label>
+					<input type="text" name="phone" id="phone" value="${showEmp.phone}" disabled>
+				</div>
+        <div class="champ">
+					${showEmp.experiences.map((ex,i)=>`
+            <label for="phone" class="phone">Experience ${i+1}:</label>
+            <ul>
+            <li>Company: ${ex.company}</li>
+            <li>Role : ${ex.role}</li>
+            <li>From : ${ex.startDate}</li>
+            <li>To : ${ex.endDate}</li>
+            </ul>
+            
+            `).join("")}
+				</div>
+
+  
+  `;
+  document.querySelector("#dialog2 .close-modal").addEventListener("click", () => {
+      document.getElementById("dialog2").classList.add("is-hidden");
+  });
+}
+

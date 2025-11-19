@@ -11,6 +11,18 @@
 
 <body>
 	<button class="hamburger" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
+	<div class="dialog2 is-hidden" id="dialog2">
+		<div id="bluer-modal"></div>
+		<div class="modal">
+			<div class="close-modal">
+				<i class="fa-solid fa-xmark"></i>
+			</div>
+			<div class="content-modal" >
+				
+			</div>
+		</div>
+	</div>
+	
 	<div class="dialog is-hidden" id="dialog">
 		<div id="bluer-modal"></div>
 
@@ -31,7 +43,7 @@
 						<option value="it">Techniciens IT</option>
 						<option value="Agents">Agents de sécurité</option>
 						<option value="Manager">Manager</option>
-						<option value="Nettoyage ">Nettoyage </option>
+						<option value="Nettoyage">Nettoyage </option>
 					</select>
 					<div class="champ">
 						<label for="image" class="name">Image</label>
@@ -84,37 +96,37 @@
 		</aside>
 		<section class="floor-wrap">
 			<div id="floorplan">
-				<div class="zone conference" data-zone="Conference">
+				<div class="zone conference" data-zone="Salle de conférence">
 					<div class="zone-body"></div>
-					<div class="zone-head"><span>Salle de conférence</span><button class="add"><i
+					<div class="zone-head"><span>Salle de conférence</span><button class="add" onclick="addToSalle(this)"><i
 								class="fa-solid fa-plus"></i></i></button></div>
 				</div>
 				<div class="zone empty-y"></div>
 				<div class="zone empty-x"></div>
-				<div class="zone reception" data-zone="Reception">
+				<div class="zone reception" data-zone="Réception">
 					<div class="zone-body"></div>
-					<div class="zone-head"><span>Réception</span><button class="add"><i
+					<div class="zone-head"><span>Réception</span><button class="add" onclick="addToSalle(this)"><i
 								class="fa-solid fa-plus"></i></button></div>
 				</div>
-				<div class="zone server" data-zone="Server Room">
+				<div class="zone server" data-zone="Salle des serveurs">
 					<div class="zone-body"></div>
-					<div class="zone-head"><span>Salle des serveurs</span><button class="add"><i
+					<div class="zone-head"><span>Salle des serveurs</span><button class="add" onclick="addToSalle(this)"><i
 								class="fa-solid fa-plus"></i></button></div>
 				</div>
-				<div class="zone security" data-zone="Security">
+				<div class="zone security" data-zone="Salle de sécurité">
 					<div class="zone-body"></div>
-					<div class="zone-head"><span>Salle de sécurité</span><button class="add"><i
+					<div class="zone-head"><span>Salle de sécurité</span><button class="add" onclick="addToSalle(this)"><i
 								class="fa-solid fa-plus"></i></button></div>
 				</div>
-				<div class="zone staffroom" data-zone="Staff Room">
+				<div class="zone staffroom" data-zone="Salle du personnel">
 					<div class="zone-body"></div>
-					<div class="zone-head"><span>Salle du personnel</span><button class="add"><i
+					<div class="zone-head"><span>Salle du personnel</span><button class="add" onclick="addToSalle(this)"><i
 								class="fa-solid fa-plus"></i></button></div>
 				</div>
 
-				<div class="zone archive" data-zone="Archive">
+				<div class="zone archive" data-zone="Salle d'archive">
 					<div class="zone-body"></div>
-					<div class="zone-head"><span>Archive</span><button class="add"><i
+					<div class="zone-head"><span>Salle d'archive</span><button class="add" onclick="addToSalle(this)"><i
 								class="fa-solid fa-plus"></i></button></div>
 				</div>
 			</div>
