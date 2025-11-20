@@ -10,9 +10,19 @@ const email = document.getElementById("email");
 const name = document.getElementById("name");
 const role = document.getElementById("role");
 const phone = document.getElementById("phone");
+let numberInplace = null;
 let employees = [];
 let idEdite = null;
 const searchInput = document.getElementById("search-input");
+let limitations = {
+  "Réception": 2,
+  "Salle des serveurs": 10,
+  "Salle de sécurité": 4,
+  "Salle d'archive": 2,
+  "Nettoyage": 4,
+  "Salle du personnel":3
+  
+}
 
 // function pour loadData
 async function loadData() {
@@ -363,7 +373,8 @@ function filterEmployeRole(employees,role){
 function addToSalle(e){
   const contentModal= document.querySelector(".content-modal");
   document.getElementById("dialog2").classList.remove("is-hidden")
-  const zone =e.closest(".zone").dataset.zone
+  const zone =e.closest(".zone").dataset.zone;
+  renderModalContent(zone, contentModal);
   const unassignedEmployees = employees.filter((emp) => emp.currentZone === null);
   let employeeAcces=[];
   const uniqueZones = {
@@ -405,6 +416,13 @@ function addToSalle(e){
 }
 //function pour select en member
 function selectEmploye(e){
+  numberInplace = employees.filter(em=>em.currentZone === e.dataset.zone).length
+  console.log(numberInplace)
+  console.log(e.dataset.zone)
+  if(numberInplace + 1 > Number(limitations[e.dataset.zone])){
+    alert("Place complete")
+    return
+  }
     const idselect = e.dataset.id;
     const employe = employees.find(e=>Number(e.id) === Number(idselect)) 
     Object.assign(employe,{currentZone:e.dataset.zone})
