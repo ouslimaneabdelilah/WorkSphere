@@ -15,14 +15,13 @@ let employees = [];
 let idEdite = null;
 const searchInput = document.getElementById("search-input");
 let limitations = {
-  "Réception": 2,
+  Réception: 2,
   "Salle des serveurs": 10,
   "Salle de sécurité": 4,
   "Salle d'archive": 2,
-  "Nettoyage": 4,
-  "Salle du personnel":3
-  
-}
+  Nettoyage: 4,
+  "Salle du personnel": 3,
+};
 
 // function pour loadData
 async function loadData() {
@@ -53,7 +52,7 @@ function saveData() {
 
 // event pour close modal
 closeModal.addEventListener("click", () => {
-  console.log("hhhhh")
+  console.log("hhhhh");
   dialog.classList.add("is-hidden");
   myForm.reset();
   document.getElementById("img-src").classList.add("is-hidden");
@@ -95,12 +94,13 @@ function filterParZone(listemployees, currentZone) {
 function renderAffichier(employees) {
   const unassigned = document.getElementById("unassigned");
   let memberUnassigned = filterParZone(employees, null);
-    const searchTerm = searchInput.value.toLowerCase();
+  const searchTerm = searchInput.value.toLowerCase();
 
-   if (searchTerm) {
-    memberUnassigned = memberUnassigned.filter(employee => 
-      employee.name.toLowerCase().includes(searchTerm) || 
-      employee.role.toLowerCase().includes(searchTerm)
+  if (searchTerm) {
+    memberUnassigned = memberUnassigned.filter(
+      (employee) =>
+        employee.name.toLowerCase().includes(searchTerm) ||
+        employee.role.toLowerCase().includes(searchTerm)
     );
   }
   const zones = [
@@ -201,7 +201,7 @@ myForm.addEventListener("submit", (e) => {
 
   formErrors.innerHTML = "";
   const newEmploye = {
-    id: idEdite? idEdite: employees.length + 1,
+    id: idEdite ? idEdite : employees.length + 1,
     name: name.value.trim(),
     role: role.value.trim(),
     photo: photo.value.trim(),
@@ -210,12 +210,11 @@ myForm.addEventListener("submit", (e) => {
     experiences: experiencesData,
     currentZone: null,
   };
-  if(idEdite){
+  if (idEdite) {
     const employeEdit = employees.find((e) => Number(e.id) === Number(idEdite));
-    Object.assign(employeEdit,newEmploye)
-    idEdite=null
-  }else{
-
+    Object.assign(employeEdit, newEmploye);
+    idEdite = null;
+  } else {
     employees.push(newEmploye);
   }
 
@@ -234,7 +233,6 @@ photo.addEventListener("change", (e) => {
   afficherImage.classList.remove("is-hidden");
   afficherImage.src = e.target.value;
 });
-
 
 //function ajouter experience
 function addExperienceRow() {
@@ -261,7 +259,7 @@ function addExperienceRow() {
                               </div>
                         `;
 }
-// suppremier 
+// suppremier
 function deleted(e) {
   e.closest(".experience-row").remove();
 }
@@ -282,7 +280,7 @@ function editEmploye(id) {
   afficherImage.src = editEmp.photo;
 
   const experiences = document.querySelector(".experiences-list");
-  experiences.innerHTML = ""; 
+  experiences.innerHTML = "";
 
   editEmp.experiences.forEach((ex) => {
     experiences.innerHTML += ` 
@@ -311,13 +309,12 @@ function editEmploye(id) {
   document.querySelector(".btn-submit").value = "Edit";
 }
 
+// details employe
 
-// details employe 
-
-function showdetails(id){
-  const showEmp=employees.find(e=>Number(e.id) === Number(id));
-  const contentModal= document.querySelector(".content-modal");
-  document.getElementById("dialog2").classList.remove("is-hidden")
+function showdetails(id) {
+  const showEmp = employees.find((e) => Number(e.id) === Number(id));
+  const contentModal = document.querySelector(".content-modal");
+  document.getElementById("dialog2").classList.remove("is-hidden");
   contentModal.innerHTML = `
         <div class="image-afficher">
             <img src="${showEmp.photo}" alt="" id="img-src" >
@@ -339,16 +336,22 @@ function showdetails(id){
 					<input type="text" name="phone" id="phone" value="${showEmp.phone}" disabled>
 				</div>
         
-          ${showEmp.currentZone != null ? `
+          ${
+            showEmp.currentZone != null
+              ? `
             <div class="champ">
               <label for="localisation" class="localisation">localisation actuelle:</label>
 					    <input type="text" name="localisation" id="localisation" value="${showEmp.currentZone}" disabled>
             <div class="champ">
-          `:""}
+          `
+              : ""
+          }
         </div>
         
-					${showEmp.experiences.map((ex,i)=>`
-            <label for="phone" class="phone">Experience ${i+1}:</label>
+					${showEmp.experiences
+            .map(
+              (ex, i) => `
+            <label for="phone" class="phone">Experience ${i + 1}:</label>
             <ul>
             <li>Company: ${ex.company}</li>
             <li>Role : ${ex.role}</li>
@@ -356,29 +359,39 @@ function showdetails(id){
             <li>To : ${ex.endDate}</li>
             </ul>
             
-            `).join("")}
+            `
+            )
+            .join("")}
 				</div>
 
   
   `;
-closeModalDeatails()
+  closeModalDeatails();
 }
-
 
 // function ajouter employes dans les salles
-function filterEmployeRole(employees,role){
-  return employees.filter(emp => emp.role === role && emp.currentZone ===null)
+function filterEmployeRole(employees, role) {
+  return employees.filter(
+    (emp) => emp.role === role && emp.currentZone === null
+  );
 }
 
-function addToSalle(e){
-  const contentModal= document.querySelector(".content-modal");
-  document.getElementById("dialog2").classList.remove("is-hidden")
-  const zone =e.closest(".zone").dataset.zone;
+function addToSalle(e) {
+  const contentModal = document.querySelector(".content-modal");
+  document.getElementById("dialog2").classList.remove("is-hidden");
+  const zone = e.closest(".zone").dataset.zone;
   renderModalContent(zone, contentModal);
-  const unassignedEmployees = employees.filter((emp) => emp.currentZone === null);
-  let employeeAcces=[];
+  closeModalDeatails();
+}
+
+//function  actualiser list de affichier les memberes select de chaque zone
+function renderModalContent(zone, container) {
+  const unassignedEmployees = employees.filter(
+    (emp) => emp.currentZone === null
+  );
+  let employeeAcces = [];
   const uniqueZones = {
-    "Réception": "Réceptionnistes",
+    Réception: "Réceptionnistes",
     "Salle des serveurs": "it",
     "Salle de sécurité": "Agents",
   };
@@ -393,59 +406,63 @@ function addToSalle(e){
   } else {
     employeeAcces = unassignedEmployees;
   }
-  contentModal.innerHTML = ""
-  if(employeeAcces.length>0){
-    employeeAcces.forEach(employee=>{
-      contentModal.innerHTML += `
+  container.innerHTML = "";
+  if (employeeAcces.length > 0) {
+    employeeAcces.forEach((employee) => {
+      container.innerHTML += `
       <li class="employee" onclick="selectEmploye(this)" data-id="${employee.id}" data-zone="${zone}">
                           <img src="${employee.photo}" alt="" width="50px" height="50px">
                           <div class="content-employe">
                               <div class="name-employe">${employee.name}</div>
                               <div class="role-employe">${employee.role}</div>
                           </div>
-          </li>`
-    })
-  }
-  else{
-    contentModal.innerHTML +=`
+          </li>`;
+    });
+  } else {
+    container.innerHTML += `
           <li class="employee">n'est pas des members</li>
 
-    `
-  } 
-   closeModalDeatails()
+    `;
+  }
 }
 //function pour select en member
-function selectEmploye(e){
-  numberInplace = employees.filter(em=>em.currentZone === e.dataset.zone).length
-  console.log(numberInplace)
-  console.log(e.dataset.zone)
-  if(numberInplace + 1 > Number(limitations[e.dataset.zone])){
-    alert("Place complete")
-    return
+function selectEmploye(e) {
+  const contentModal = document.querySelector("#dialog2 .content-modal");
+  const zone = e.dataset.zone
+  numberInplace = employees.filter(
+    (em) => em.currentZone === zone
+  ).length;
+  console.log(numberInplace);
+  console.log(e.dataset.zone);
+  if (numberInplace + 1 > Number(limitations[e.dataset.zone])) {
+    alert("Place complete");
+    return;
   }
-    const idselect = e.dataset.id;
-    const employe = employees.find(e=>Number(e.id) === Number(idselect)) 
-    Object.assign(employe,{currentZone:e.dataset.zone})
-    saveData()
-    renderAffichier(employees)
+  const idselect = e.dataset.id;
+  const employe = employees.find((e) => Number(e.id) === Number(idselect));
+  Object.assign(employe, { currentZone: e.dataset.zone });
+  saveData();
+  renderAffichier(employees)
+  renderModalContent(zone, contentModal);
 }
 // event pour search par nom et role
 searchInput.addEventListener("input", () => {
   renderAffichier(employees);
 });
 
-
 // event suppremier un memeber dans zone
-function removeInZone(id){
-  const employeRemove= employees.find(em=>Number(em.id) ===Number(id))
-  Object.assign(employeRemove,{currentZone:null})
-  saveData()
-  renderAffichier(employees)
+function removeInZone(id) {
+  const employeRemove = employees.find((em) => Number(em.id) === Number(id));
+  Object.assign(employeRemove, { currentZone: null });
+  saveData();
+  renderAffichier(employees);
 }
 
-// function close modal pour details 
-function closeModalDeatails(){
-  document.querySelector("#dialog2 .close-modal").addEventListener("click", () => {
+// function close modal pour details
+function closeModalDeatails() {
+  document
+    .querySelector("#dialog2 .close-modal")
+    .addEventListener("click", () => {
       document.getElementById("dialog2").classList.add("is-hidden");
-  });
+    });
 }
