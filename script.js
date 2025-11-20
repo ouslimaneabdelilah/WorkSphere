@@ -12,6 +12,8 @@ const role = document.getElementById("role");
 const phone = document.getElementById("phone");
 let employees = [];
 let idEdite = null;
+const searchInput = document.getElementById("search-input");
+
 // function pour loadData
 async function loadData() {
   try {
@@ -62,8 +64,8 @@ function InjectHtml(list, selector) {
   selector.innerHTML = "";
   list.forEach((employee) => {
     selector.innerHTML += `
-		  <div class="employee-sale">
-            <div class="delete">X</div>
+		  <div class="employee-sale" onclick="showdetails(${employee.id})">
+            <div class="delete" onclick="removeInZone(${employee.id})">X</div>
             <img src="${employee.photo}" alt="" width="50px" height="50px">
             <div class="content-employe">
                 <div class="name-employe">${employee.name}</div>
@@ -82,8 +84,15 @@ function filterParZone(listemployees, currentZone) {
 
 function renderAffichier(employees) {
   const unassigned = document.getElementById("unassigned");
-  const memberUnassigned = filterParZone(employees, null);
+  let memberUnassigned = filterParZone(employees, null);
+    const searchTerm = searchInput.value.toLowerCase();
 
+   if (searchTerm) {
+    memberUnassigned = memberUnassigned.filter(employee => 
+      employee.name.toLowerCase().includes(searchTerm) || 
+      employee.role.toLowerCase().includes(searchTerm)
+    );
+  }
   const zones = [
     { name: "Réception", selector: ".reception .zone-body" },
     { name: "Salle des serveurs", selector: ".server .zone-body" },
@@ -301,7 +310,7 @@ function showdetails(id){
   document.getElementById("dialog2").classList.remove("is-hidden")
   contentModal.innerHTML = `
         <div class="image-afficher">
-            <img src="./assets/img/image.png" alt="" id="img-src" >
+            <img src="${showEmp.photo}" alt="" id="img-src" >
         </div>
         <div class="champ">
 					<label for="name" class="name">Name: </label>
@@ -319,7 +328,15 @@ function showdetails(id){
 					<label for="phone" class="phone">Phone:</label>
 					<input type="text" name="phone" id="phone" value="${showEmp.phone}" disabled>
 				</div>
-        <div class="champ">
+        
+          ${showEmp.currentZone != null ? `
+            <div class="champ">
+              <label for="localisation" class="localisation">localisation actuelle:</label>
+					    <input type="text" name="localisation" id="localisation" value="${showEmp.currentZone}" disabled>
+            <div class="champ">
+          `:""}
+        </div>
+        
 					${showEmp.experiences.map((ex,i)=>`
             <label for="phone" class="phone">Experience ${i+1}:</label>
             <ul>
@@ -334,9 +351,7 @@ function showdetails(id){
 
   
   `;
-  document.querySelector("#dialog2 .close-modal").addEventListener("click", () => {
-      document.getElementById("dialog2").classList.add("is-hidden");
-  });
+closeModalDeatails()
 }
 
 
@@ -344,6 +359,7 @@ function showdetails(id){
 function filterEmployeRole(employees,role){
   return employees.filter(emp => emp.role === role && emp.currentZone ===null)
 }
+
 function addToSalle(e){
   const contentModal= document.querySelector(".content-modal");
   document.getElementById("dialog2").classList.remove("is-hidden")
@@ -385,9 +401,7 @@ function addToSalle(e){
 
     `
   } 
-    document.querySelector("#dialog2 .close-modal").addEventListener("click", () => {
-      document.getElementById("dialog2").classList.add("is-hidden");
-  });
+   closeModalDeatails()
 }
 //function pour select en member
 function selectEmploye(e){
@@ -396,4 +410,24 @@ function selectEmploye(e){
     Object.assign(employe,{currentZone:e.dataset.zone})
     saveData()
     renderAffichier(employees)
+}
+// event pour search par nom et role
+searchInput.addEventListener("input", () => {
+  renderAffichier(employees);
+});
+
+
+// event suppremier un memeber dans zone
+function removeInZone(id){
+  const employeRemove= employees.find(em=>Number(em.id) ===Number(id))
+  Object.assign(employeRemove,{currentZone:null})
+  saveData()
+  renderAffichier(employees)
+}
+
+// function close modal pour details 
+function closeModalDeatails(){
+  document.querySelector("#dialog2 .close-modal").addEventListener("click", () => {
+      document.getElementById("dialog2").classList.add("is-hidden");
+  });
 }

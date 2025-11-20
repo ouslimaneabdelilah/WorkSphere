@@ -462,6 +462,37 @@ input[type="submit"]:hover {
     font-size: 0.9rem;
 }
 
+.search-filter {
+  position: relative;
+  margin: 15px 0;
+}
+
+
+#search-input {
+  width: 100%;
+  padding: 10px 15px 10px 40px;
+  font-size: 16px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+#icone-search{
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+}
+
+#search-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#search-input::placeholder {
+  color: #999;
+}
 
 @media (max-width: 1023px) {
     .plan {
