@@ -73,9 +73,9 @@ function InjectHtml(list, selector) {
   selector.innerHTML = "";
   list.forEach((employee) => {
     selector.innerHTML += `
-		  <div class="employee-sale" onclick="showdetails(${employee.id})">
-            <div class="delete" onclick="removeInZone(${employee.id})">X</div>
-            <img src="${employee.photo}" alt="" width="50px" height="50px">
+		  <div class="employee-sale" >
+            <div class="delete" onclick="removeInZone(${employee.id})"><i class="fa-solid fa-xmark"></i></div>
+            <img src="${employee.photo}" alt="" width="50px" height="50px" onclick="showdetails(${employee.id})">
             <div class="content-employe">
                 <div class="name-employe">${employee.name}</div>
                 <div class="role-employe">${employee.role}</div>
@@ -99,8 +99,8 @@ function renderAffichier(employees) {
   if (searchTerm) {
     memberUnassigned = memberUnassigned.filter(
       (employee) =>
-        employee.name.toLowerCase().includes(searchTerm) ||
-        employee.role.toLowerCase().includes(searchTerm)
+        employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.role.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }
   const zones = [
@@ -121,8 +121,8 @@ function renderAffichier(employees) {
   unassigned.innerHTML = "";
   memberUnassigned.forEach((employee) => {
     unassigned.innerHTML += `
-		<li class="employee" onclick="showdetails(${employee.id})">
-                        <img src="${employee.photo}" alt="" width="50px" height="50px">
+		<li class="employee">
+                        <img src="${employee.photo}" alt="" width="50px" height="50px" onclick="showdetails(${employee.id})">
                         <div class="content-employe">
                             <div class="name-employe">${employee.name}</div>
                             <div class="role-employe">${employee.role}</div>
