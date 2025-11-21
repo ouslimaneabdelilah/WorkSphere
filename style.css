@@ -118,8 +118,8 @@
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
-    grid-template-columns: 1.35fr 0.6fr 0.8fr 0.8fr;
-    grid-template-rows: 1.1fr 1fr 1.1fr;
+    grid-template-columns: 1.36fr 0.54fr 0.8fr 0.8fr;
+    grid-template-rows: 1.13fr 1fr 1.1fr;
     gap: 5px;
     grid-template-areas:
         "conference emptyy server security"
@@ -130,32 +130,26 @@
 
 .conference {
     grid-area: conference;
-    background-color: rgba(255, 0, 0, 0.4);
 }
 
 .reception {
     grid-area: reception;
-    background-color: rgba(0, 255, 0, 0.4);
 }
 
 .server {
     grid-area: server;
-    background-color: rgba(0, 0, 255, 0.4);
 }
 
 .security {
     grid-area: security;
-    background-color: rgba(255, 255, 0, 0.4);
 }
 
 .staffroom {
     grid-area: staffroom;
-    background-color: rgba(0, 255, 255, 0.4);
 }
 
 .archive {
     grid-area: archive;
-    background-color: rgba(255, 0, 255, 0.4);
 }
 
 .empty-x {
@@ -168,6 +162,7 @@
 
 .zone {
     width: 100%;
+    text-align: center;
     position: relative;
     height: 100%;
     margin: 0;
@@ -177,6 +172,7 @@
     align-items: center;
     gap: 10px;
     padding-top: 10px;
+    text-wrap: balance; 
 }
 .zone-head{
     display: flex;
@@ -214,9 +210,7 @@
 }
 
 
-.is-hidden {
-    display: none;
-}
+
 
 #bluer-modal{
     position: fixed;
@@ -389,6 +383,38 @@ select:focus {
     color: #721c24;
 }
 
+.alert{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: #fff;
+    border-radius: 8px;
+    position: absolute;
+    z-index: 900000;
+    width: 300px;
+    text-align: center;
+    box-shadow: rgba(0,0,0,0.1);
+    height: 50px;
+        font-size: 0.9rem;
+
+
+}
+.alert-success{
+    background-color: #26a745;
+}
+.alert-error{
+    background-color: #dc3545;
+}
+.alert-info{
+    background-color: #17a2b8;
+}
+
+.is-hidden {
+    display: none;
+}
 input[type="submit"] {
     background-color: var(--btn-scn);
     color: white;
@@ -415,11 +441,12 @@ input[type="submit"]:hover {
 }
 
 .zone-body {
+    z-index: 900;
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
     justify-content: center;
-    width: fit-content;
+    width: 100%;
     padding: 5px;
     overflow-y: auto;
 }
@@ -428,17 +455,18 @@ input[type="submit"]:hover {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 8px;
     background-color: var(--bg-box-aside);
     padding: 5px;
     border-radius: 8px;
     border: 1px solid #ddd;
+    width: 110px;
+    padding-right: 25px;
 }
 
 .employee-sale img {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
 }
 
@@ -446,16 +474,25 @@ input[type="submit"]:hover {
     display: flex;
     flex-direction: column;
     font-size: 0.8rem;
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+}
+.content-zone{
+    font-size: 0.6rem;
+
 }
 
 .name-employe {
     font-weight: bold;
+     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .delete {
     position: absolute;
     top: 5px;
-    right: 8px;
+    right: 5px;
     cursor: pointer;
     color: var(--btn-close);
     font-weight: bold;
@@ -463,6 +500,7 @@ input[type="submit"]:hover {
 }
 
 .search-filter {
+    width: 100%;
   position: relative;
   margin: 15px 0;
 }
@@ -472,7 +510,7 @@ input[type="submit"]:hover {
   width: 100%;
   padding: 10px 15px 10px 40px;
   font-size: 16px;
-  border-radius: 20px;
+  border-radius: 10px;
   border: 1px solid #ddd;
   background-color: #f9f9f9;
   transition: border-color 0.3s, box-shadow 0.3s;

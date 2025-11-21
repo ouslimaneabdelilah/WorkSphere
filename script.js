@@ -52,7 +52,6 @@ function saveData() {
 
 // event pour close modal
 closeModal.addEventListener("click", () => {
-  console.log("hhhhh");
   dialog.classList.add("is-hidden");
   myForm.reset();
   document.getElementById("img-src").classList.add("is-hidden");
@@ -76,7 +75,7 @@ function InjectHtml(list, selector) {
 		  <div class="employee-sale" >
             <div class="delete" onclick="removeInZone(${employee.id})"><i class="fa-solid fa-xmark"></i></div>
             <img src="${employee.photo}" alt="" width="50px" height="50px" onclick="showdetails(${employee.id})">
-            <div class="content-employe">
+            <div class="content-employe content-zone">
                 <div class="name-employe">${employee.name}</div>
                 <div class="role-employe">${employee.role}</div>
             </div>
@@ -104,19 +103,24 @@ function renderAffichier(employees) {
     );
   }
   const zones = [
-    { name: "Réception", selector: ".reception .zone-body" },
-    { name: "Salle des serveurs", selector: ".server .zone-body" },
-    { name: "Salle de sécurité", selector: ".security .zone-body" },
-    { name: "Salle du personnel", selector: ".staffroom .zone-body" },
-    { name: "Salle d'archive", selector: ".archive .zone-body" },
-    { name: "Salle de conférence", selector: ".conference .zone-body" },
+    { name: "Réception", selector: ".reception .zone-body",obligatoire:true },
+    { name: "Salle des serveurs", selector: ".server .zone-body",obligatoire:true },
+    { name: "Salle de sécurité", selector: ".security .zone-body",obligatoire:true },
+    { name: "Salle du personnel", selector: ".staffroom .zone-body",obligatoire:false },
+    { name: "Salle d'archive", selector: ".archive .zone-body",obligatoire:false },
+    { name: "Salle de conférence", selector: ".conference .zone-body",obligatoire:false },
   ];
 
   zones.forEach((zone) => {
     const members = filterParZone(employees, zone.name);
     const zoneElement = document.querySelector(zone.selector);
+    if(zone.obligatoire && members.length === 0){
+      document.querySelector(zone.selector.split(" ")[0]).style.backgroundColor = "rgba(224, 15, 15, 0.377)"
+    }
     InjectHtml(members, zoneElement);
   });
+
+
 
   unassigned.innerHTML = "";
   memberUnassigned.forEach((employee) => {
@@ -426,6 +430,7 @@ function renderModalContent(zone, container) {
   }
 }
 //function pour select en member
+const alert =document.querySelector(".alert")
 function selectEmploye(e) {
   const contentModal = document.querySelector("#dialog2 .content-modal");
   const zone = e.dataset.zone
@@ -435,7 +440,14 @@ function selectEmploye(e) {
   console.log(numberInplace);
   console.log(e.dataset.zone);
   if (numberInplace + 1 > Number(limitations[e.dataset.zone])) {
-    alert("Place complete");
+    alert.classList.add("alert-info")
+    alert.classList.remove("is-hidden")
+    alert.innerText = "Information : Les place est plan"
+    setTimeout(()=>{
+      
+      alert.classList.add("is-hidden")
+    },2000)
+
     return;
   }
   const idselect = e.dataset.id;
@@ -466,3 +478,5 @@ function closeModalDeatails() {
       document.getElementById("dialog2").classList.add("is-hidden");
     });
 }
+
+//
