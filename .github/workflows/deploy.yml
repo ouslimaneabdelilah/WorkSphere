@@ -39,7 +39,7 @@ jobs:
           git fetch origin
           git checkout main
           git pull origin main
-          git merge origin/develop --no-ff --commit -m "CI: Auto-merge develop into main"
+          git merge origin/develop --allow-unrelated-histories --no-ff --commit -m "CI: Auto-merge develop into main"
           git push origin main
 
   cd:
