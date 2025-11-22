@@ -10,6 +10,7 @@ const email = document.getElementById("email");
 const name = document.getElementById("name");
 const role = document.getElementById("role");
 const phone = document.getElementById("phone");
+const hamburger = document.querySelector(".hamburger")
 let numberInplace = null;
 let employees = [];
 let idEdite = null;
@@ -478,5 +479,10 @@ function closeModalDeatails() {
       document.getElementById("dialog2").classList.add("is-hidden");
     });
 }
+
+hamburger.addEventListener("click",()=>{
+  const sideBar =document.querySelector(".sidebar");
+  sideBar.classList.toggle("sidebar--open")
+})
 
 //
