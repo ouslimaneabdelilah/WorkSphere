@@ -414,7 +414,7 @@ function renderModalContent(zone, container) {
     );
   } else if (zone === "Salle d'archive") {
     employeeAcces = unassignedEmployees.filter(
-      (emp) => emp.role !== "Nettoyage"
+      (emp) => emp.role == "Manager"
     );
   } else {
     employeeAcces = unassignedEmployees;
@@ -493,5 +493,16 @@ hamburger.addEventListener("click",()=>{
   sideBar.classList.toggle("sidebar--open")
 })
 
+function assign(query){
+  const zones = document.querySelectorAll('.zone .name-employe')
+  zones.forEach(zone=>{
+    if(zone.innerText.includes(query)){
+      console.log(zone)
+    }
+  })
+}
+
+
 
 //test deployment
+assign("Elodie")
