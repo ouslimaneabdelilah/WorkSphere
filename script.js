@@ -77,6 +77,9 @@ closeModal.addEventListener("click", () => {
 });
 // Event Click Add New Worker
 btnAdd.addEventListener("click", () => {
+  const afficherImage = document.getElementById("img-src");
+  afficherImage.src = "https://picsum.photos/200/300"
+  afficherImage.classList.remove("is-hidden");
   dialog.classList.remove("is-hidden");
 });
 
@@ -169,7 +172,7 @@ myForm.addEventListener("submit", (e) => {
     errors.push("L'email n'est pas valide.");
   }
   if (photo.value.trim() === "") {
-    errors.push("L'URL de la photo est requise.");
+    photo.value = "https://picsum.photos/200/300"
   }
 
   if (phone.value.trim() === "") {
