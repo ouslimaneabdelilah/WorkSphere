@@ -15,14 +15,28 @@ let numberInplace = null;
 let employees = [];
 let idEdite = null;
 const searchInput = document.getElementById("search-input");
+const uniqueZones = {
+    "Réception": "Réceptionnistes",
+    "Salle des serveurs": "it",
+    "Salle de sécurité": "Agents",
+  };
 let limitations = {
-  Réception: 2,
+  "Réception": 2,
   "Salle des serveurs": 10,
   "Salle de sécurité": 4,
   "Salle d'archive": 2,
-  Nettoyage: 4,
+  "Salle de conférence": 4,
   "Salle du personnel": 3,
 };
+
+  const zones = [
+    { name: "Réception", selector: ".reception .zone-body",obligatoire:true },
+    { name: "Salle des serveurs", selector: ".server .zone-body",obligatoire:true },
+    { name: "Salle de sécurité", selector: ".security .zone-body",obligatoire:true },
+    { name: "Salle du personnel", selector: ".staffroom .zone-body",obligatoire:false },
+    { name: "Salle d'archive", selector: ".archive .zone-body",obligatoire:false },
+    { name: "Salle de conférence", selector: ".conference .zone-body",obligatoire:false },
+  ];
 
 // function pour loadData
 async function loadData() {
@@ -63,6 +77,9 @@ closeModal.addEventListener("click", () => {
 });
 // Event Click Add New Worker
 btnAdd.addEventListener("click", () => {
+  const afficherImage = document.getElementById("img-src");
+  afficherImage.src = "https://picsum.photos/200/300"
+  afficherImage.classList.remove("is-hidden");
   dialog.classList.remove("is-hidden");
 });
 
@@ -103,20 +120,16 @@ function renderAffichier(employees) {
         employee.role.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }
-  const zones = [
-    { name: "Réception", selector: ".reception .zone-body",obligatoire:true },
-    { name: "Salle des serveurs", selector: ".server .zone-body",obligatoire:true },
-    { name: "Salle de sécurité", selector: ".security .zone-body",obligatoire:true },
-    { name: "Salle du personnel", selector: ".staffroom .zone-body",obligatoire:false },
-    { name: "Salle d'archive", selector: ".archive .zone-body",obligatoire:false },
-    { name: "Salle de conférence", selector: ".conference .zone-body",obligatoire:false },
-  ];
 
   zones.forEach((zone) => {
     const members = filterParZone(employees, zone.name);
     const zoneElement = document.querySelector(zone.selector);
     if(zone.obligatoire && members.length === 0){
       document.querySelector(zone.selector.split(" ")[0]).style.backgroundColor = "rgba(224, 15, 15, 0.377)"
+    }
+    else{
+      document.querySelector(zone.selector.split(" ")[0]).style.backgroundColor = "transparent"
+
     }
     InjectHtml(members, zoneElement);
   });
@@ -159,7 +172,7 @@ myForm.addEventListener("submit", (e) => {
     errors.push("L'email n'est pas valide.");
   }
   if (photo.value.trim() === "") {
-    errors.push("L'URL de la photo est requise.");
+    photo.value = "https://picsum.photos/200/300"
   }
 
   if (phone.value.trim() === "") {
@@ -395,11 +408,6 @@ function renderModalContent(zone, container) {
     (emp) => emp.currentZone === null
   );
   let employeeAcces = [];
-  const uniqueZones = {
-    Réception: "Réceptionnistes",
-    "Salle des serveurs": "it",
-    "Salle de sécurité": "Agents",
-  };
   if (uniqueZones[zone]) {
     employeeAcces = unassignedEmployees.filter(
       (emp) => emp.role === uniqueZones[zone] || emp.role === "Manager"
@@ -485,4 +493,5 @@ hamburger.addEventListener("click",()=>{
   sideBar.classList.toggle("sidebar--open")
 })
 
-//
+
+//test deployment
