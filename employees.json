@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Alice Dupont",
-    "role": "Réceptionniste",
+    "role": "Réceptionnistes",
     "photo": "https://picsum.photos/200/300",
     "email": "alice.dupont@example.com",
     "phone": "0612345678",
@@ -14,14 +14,14 @@
   {
     "id": 2,
     "name": "Bob Martin",
-    "role": "Technicien IT",
+    "role": "it",
     "photo": "https://picsum.photos/200/300",
     "email": "bob.martin@example.com",
     "phone": "0698765432",
     "experiences": [
       { "company": "Entreprise B", "startDate": "2017-03-15", "endDate": "2021-12-31" }
     ],
-    "currentZone": "Salle des serveurs"
+    "currentZone": "Agents"
   },
   {
     "id": 3,
@@ -51,7 +51,7 @@
   {
     "id": 5,
     "name": "Elodie Bernard",
-    "role": "Nettoyage",
+    "role": "Agents",
     "photo": "https://picsum.photos/200/300",
     "email": "elodie.bernard@example.com",
     "phone": "0633445566",
@@ -63,7 +63,7 @@
   {
     "id": 6,
     "name": "François Leclerc",
-    "role": "Technicien IT",
+    "role": "it",
     "photo": "https://picsum.photos/200/300",
     "email": "francois.leclerc@example.com",
     "phone": "0644556677",
@@ -75,7 +75,7 @@
   {
     "id": 7,
     "name": "Gabrielle Rousseau",
-    "role": "Réceptionniste",
+    "role": "Réceptionnistes",
     "photo": "https://picsum.photos/200/300",
     "email": "gabrielle.rousseau@example.com",
     "phone": "0655667788",
@@ -87,7 +87,7 @@
   {
     "id": 8,
     "name": "Hugo Fontaine",
-    "role": "Agent de sécurité",
+    "role": "Agents",
     "photo": "https://picsum.photos/200/300",
     "email": "hugo.fontaine@example.com",
     "phone": "0666778899",
@@ -99,7 +99,7 @@
   {
     "id": 9,
     "name": "Isabelle Caron",
-    "role": "Technicien IT",
+    "role": "it",
     "photo": "https://picsum.photos/200/300",
     "email": "isabelle.caron@example.com",
     "phone": "0677889900",
